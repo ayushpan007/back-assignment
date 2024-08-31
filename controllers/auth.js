@@ -11,9 +11,7 @@ const register = async (req, res) => {
         if (validateErrors) {
             res.status(400).json(validateErrors);
         }
-
         const { errors, doc } = await AuthService.register(validData);
-        
         if(errors){
             res.status(404).json(errors);
         }

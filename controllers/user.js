@@ -15,7 +15,7 @@ const patch = async (req, res) => {
             res.status(400).json(validateErrors);
         }
 
-        const { errors, doc } = await UserService.patch(validData);
+        const { errors, doc } = await UserService.patchUser(validData);
 
         if (errors) {
             res.status(404).json(errors);
@@ -38,7 +38,7 @@ const remove = async (req, res) => {
             res.status(400).json(validateErrors);
         }
 
-        const { errors, doc } = await UserService.remove(validData);
+        const { errors, doc } = await UserService.deleteUser(validData);
 
         if (errors) {
             res.status(404).json(errors);
@@ -62,7 +62,7 @@ const getById = async (req, res) => {
             res.status(400).json(validateErrors);
         }
 
-        const { errors, doc } = await UserService.getById(validData);
+        const { errors, doc } = await UserService.getUserById(validData);
 
         if (errors) {
             res.status(404).json(errors);
@@ -83,22 +83,7 @@ const get = async (req, res) => {
 
         const offset = limit * ((parseInt(pageNumber) || 1) - 1);
 
-        const { errors, doc } = await UserService.get({limit, offset});
-
-        if (errors) {
-            res.status(404).json(errors);
-        }
-
-        res.status(200).json(doc)
-    }
-    catch (error) {
-        res.status(500).json({ errors: error })
-    }
-}
-
-const getStats = async (req, res) => {
-    try {
-        const { errors, doc } = await UserService.getStats();
+        const { errors, doc } = await UserService.getUsers({ limit, offset });
 
         if (errors) {
             res.status(404).json(errors);
@@ -116,5 +101,4 @@ module.exports = {
     remove,
     getById,
     get,
-    getStats,
 }

@@ -6,5 +6,4 @@ module.exports = (router) => {
     router.delete('/user/:id', verifyTokenAndAuthenticate, remove)
     router.get('/user/get-by-id/:id', verifyTokenAndAuthenticate, getById);
     router.get('/user/get', verifyTokenAndAdmin, get);
-    router.get('/user/stats', verifyTokenAndAdmin, getStats);
 }
